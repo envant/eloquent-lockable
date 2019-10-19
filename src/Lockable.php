@@ -12,14 +12,14 @@ trait Lockable
         parent::boot();
 
         static::updating(function ($model) {
-            if ((bool) $model->locked_updating) {
-                throw new UpdatingLockedException($model);
+            if ((bool) $model->locked_updating[config('lockable.locked_updating_column')]) {
+                throw new UpdatingLockedException();
             }
         });
 
         static::deleting(function ($model) {
-            if ((bool) $model->locked_deletion) {
-                throw new DeletingLockedException($model);
+            if ((bool) $model[config('lockable.locked_deletion_column')]) {
+                throw new DeletingLockedException();
             };
         });
     }
