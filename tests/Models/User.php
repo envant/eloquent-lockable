@@ -11,6 +11,6 @@ class User extends Model
 
     /** @var array */
     protected $fillable = [
-        'id', 'email', 'locked_updating', 'locked_deletion'
+        'id', 'email', 'locked_updating', 'locked_deletion',
     ];
 }
