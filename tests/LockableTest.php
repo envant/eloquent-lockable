@@ -1,8 +1,8 @@
 <?php
 
+use Envant\EloquentLockable\Tests\TestCase;
 use Envant\EloquentLockable\Exceptions\DeletingLockedException;
 use Envant\EloquentLockable\Exceptions\UpdatingLockedException;
-use Envant\EloquentLockable\Tests\TestCase;
 
 class LockableTest extends TestCase
 {

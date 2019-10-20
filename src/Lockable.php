@@ -13,6 +13,7 @@ trait Lockable
     public function lockUpdating()
     {
         $this[config('lockable.locked_updating_column')] = true;
+
         return $this->save();
     }
 
@@ -22,6 +23,7 @@ trait Lockable
     public function unlockUpdating()
     {
         $this[config('lockable.locked_updating_column')] = false;
+
         return $this->save();
     }
 
@@ -31,6 +33,7 @@ trait Lockable
     public function lockDeleting()
     {
         $this[config('lockable.locked_deletion_column')] = true;
+
         return $this->save();
     }
 
@@ -40,6 +43,7 @@ trait Lockable
     public function unlockDeleting()
     {
         $this[config('lockable.locked_deletion_column')] = false;
+
         return $this->save();
     }
 
@@ -56,7 +60,7 @@ trait Lockable
         static::deleting(function ($model) {
             if ((bool) $model[config('lockable.locked_deletion_column')]) {
                 throw new DeletingLockedException();
-            };
+            }
         });
     }
 }

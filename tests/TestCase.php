@@ -2,8 +2,8 @@
 
 namespace Envant\EloquentLockable\Tests;
 
-use Envant\EloquentLockable\Tests\Models\User;
 use Illuminate\Support\Facades\Config;
+use Envant\EloquentLockable\Tests\Models\User;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -57,7 +57,7 @@ abstract class TestCase extends BaseTestCase
     {
         $this->loadMigrationsFrom([
             '--database' => 'testbench',
-            '--path' => realpath(__DIR__ . '/migrations'),
+            '--path' => realpath(__DIR__.'/migrations'),
         ]);
         $this->testUser = User::create([
             'email' => 'example@example.org',
