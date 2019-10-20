@@ -7,33 +7,13 @@ use Envant\EloquentLockable\Exceptions\UpdatingLockedException;
 
 trait Lockable
 {
-    public function lock()
-    {
-        return $this->update([
-            config('lockable.locked_updating_column') => true,
-            config('lockable.locked_deletion_column') => true,
-        ]);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function unlock()
-    {
-        return $this->update([
-            config('lockable.locked_updating_column') => false,
-            config('lockable.locked_deletion_column') => false,
-        ]);
-    }
-
     /**
      * @return mixed
      */
     public function lockUpdating()
     {
-        return $this->update([
-            config('lockable.locked_updating_column') => true,
-        ]);
+        $this[config('lockable.locked_updating_column')] = true;
+        return $this->save();
     }
 
     /**
@@ -41,9 +21,8 @@ trait Lockable
      */
     public function unlockUpdating()
     {
-        return $this->update([
-            config('lockable.locked_updating_column') => false,
-        ]);
+        $this[config('lockable.locked_updating_column')] = false;
+        return $this->save();
     }
 
     /**
@@ -51,9 +30,8 @@ trait Lockable
      */
     public function lockDeleting()
     {
-        return $this->update([
-            config('lockable.locked_deletion_column') => true,
-        ]);
+        $this[config('lockable.locked_deletion_column')] = true;
+        return $this->save();
     }
 
     /**
@@ -61,9 +39,8 @@ trait Lockable
      */
     public function unlockDeleting()
     {
-        return $this->update([
-            config('lockable.locked_deletion_column') => false,
-        ]);
+        $this[config('lockable.locked_deletion_column')] = false;
+        return $this->save();
     }
 
     public static function boot()
@@ -71,7 +48,7 @@ trait Lockable
         parent::boot();
 
         static::updating(function ($model) {
-            if ((bool) $model->locked_updating[config('lockable.locked_updating_column')]) {
+            if ((bool) $model[config('lockable.locked_updating_column')]) {
                 throw new UpdatingLockedException();
             }
         });

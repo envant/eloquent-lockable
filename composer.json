@@ -19,6 +19,11 @@
             "Envant\\EloquentLockable\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Envant\\EloquentLockable\\Tests\\": "tests"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
