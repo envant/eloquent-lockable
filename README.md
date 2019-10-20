@@ -7,6 +7,14 @@
 
 Package for blocking actions with a specific eloquent model
 
+## Installation
+
+Install package through Composer
+
+``` bash
+$ composer require envant/eloquent-lockable
+```
+
 ## Usage
 
 1. Add the `Lockable` trait to your model
