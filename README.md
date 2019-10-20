@@ -5,6 +5,13 @@
 
 Package for blocking actions with a specific eloquent model
 
+## Usage
+
+1. Add the `Lockable` trait to your model
+2. Add the `$table->lockable()` to model migration
+3. Use method $model->lockDeleting() and $model->unlockDeleting() to lock and unlock deletion
+3. Use method $model->lockUpdating() and $model->unlockUpdating() to lock and unlock the update
+
 ## Testing
 
 ``` bash
