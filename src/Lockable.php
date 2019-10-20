@@ -7,6 +7,25 @@ use Envant\EloquentLockable\Exceptions\UpdatingLockedException;
 
 trait Lockable
 {
+    public function lock()
+    {
+        return $this->update([
+            config('lockable.locked_updating_column') => true,
+            config('lockable.locked_deletion_column') => true,
+        ]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function unlock()
+    {
+        return $this->update([
+            config('lockable.locked_updating_column') => false,
+            config('lockable.locked_deletion_column') => false,
+        ]);
+    }
+
     /**
      * @return mixed
      */
@@ -23,7 +42,7 @@ trait Lockable
     public function unlockUpdating()
     {
         return $this->update([
-            config('lockable.locked_updating_column') => true,
+            config('lockable.locked_updating_column') => false,
         ]);
     }
 
@@ -33,7 +52,7 @@ trait Lockable
     public function lockDeleting()
     {
         return $this->update([
-            config('lockable.locked_deletion_column') => false,
+            config('lockable.locked_deletion_column') => true,
         ]);
     }
 
