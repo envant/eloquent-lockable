@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/envant/eloquent-lockable.svg?branch=master)](https://travis-ci.org/envant/fireable)
 ![GitHub](https://img.shields.io/github/license/envant/eloquent-lockable)
 
-Package for locing update and deletion actions with a specific eloquent model
+Package for locking update and deletion actions with a specific eloquent model
 
 ## Installation
 
