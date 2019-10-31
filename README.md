@@ -33,4 +33,4 @@ If you discover any security related issues, please email author email instead o
 
 ## License
 
-license. Please see the [license file](license.md) for more information.
+license. Please see the [license file](LICENSE) for more information.
