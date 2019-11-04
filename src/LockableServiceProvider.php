@@ -15,7 +15,7 @@ class LockableServiceProvider extends ServiceProvider
         });
     }
 
-    public function boot()
+    public function bootLockable()
     {
         $this->publishes([
             __DIR__.'/config/lockable.php' => config_path('lockable.php'),
