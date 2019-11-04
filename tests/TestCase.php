@@ -2,8 +2,8 @@
 
 namespace Envant\EloquentLockable\Tests;
 
-use Illuminate\Support\Facades\Config;
 use Envant\EloquentLockable\Tests\Models\User;
+use Illuminate\Support\Facades\Config;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
