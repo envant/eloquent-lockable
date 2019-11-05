@@ -49,8 +49,6 @@ trait Lockable
 
     public static function bootLockable()
     {
-        parent::boot();
-
         static::updating(function ($model) {
             if ((bool) $model[config('lockable.locked_updating_column')]) {
                 throw new UpdatingLockedException();
