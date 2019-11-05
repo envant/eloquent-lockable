@@ -47,7 +47,7 @@ trait Lockable
         return $this->save();
     }
 
-    public static function boot()
+    public static function bootLockable()
     {
         parent::boot();
 
