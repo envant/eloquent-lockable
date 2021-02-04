@@ -7,6 +7,7 @@ use Envant\EloquentLockable\Exceptions\UpdatingLockedException;
 
 trait Lockable
 {
+
     /**
      * @return mixed
      */
@@ -122,13 +123,13 @@ trait Lockable
     public static function bootLockable()
     {
         static::updating(function ($model) {
-            if ((bool) $model[config('lockable.locked_updating_column')]) {
+            if ((bool)$model[config('lockable.locked_updating_column')]) {
                 throw new UpdatingLockedException();
             }
         });
 
         static::deleting(function ($model) {
-            if ((bool) $model[config('lockable.locked_deletion_column')]) {
+            if ((bool)$model[config('lockable.locked_deletion_column')]) {
                 throw new DeletingLockedException();
             }
         });
