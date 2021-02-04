@@ -12,9 +12,17 @@ trait Lockable
      */
     public function lockUpdating()
     {
+        if ($this->fireModelEvent('lockingUpdates') === false) {
+            return false;
+        }
+
         $this[config('lockable.locked_updating_column')] = true;
 
-        return $this->save();
+        $result = $this->save();
+
+        $this->fireModelEvent('lockedUpdates', false);
+
+        return $result;
     }
 
     /**
@@ -22,9 +30,17 @@ trait Lockable
      */
     public function unlockUpdating()
     {
+        if ($this->fireModelEvent('unlockingUpdates') === false) {
+            return false;
+        }
+
         $this[config('lockable.locked_updating_column')] = false;
 
-        return $this->save();
+        $result = $this->save();
+
+        $this->fireModelEvent('unlockedUpdates', false);
+
+        return $result;
     }
 
     /**
@@ -32,9 +48,17 @@ trait Lockable
      */
     public function lockDeleting()
     {
+        if ($this->fireModelEvent('lockingDeletes') === false) {
+            return false;
+        }
+
         $this[config('lockable.locked_deletion_column')] = true;
 
-        return $this->save();
+        $result = $this->save();
+
+        $this->fireModelEvent('lockedDeletes', false);
+
+        return $result;
     }
 
     /**
@@ -42,9 +66,57 @@ trait Lockable
      */
     public function unlockDeleting()
     {
+        if ($this->fireModelEvent('unlockingDeletes') === false) {
+            return false;
+        }
+
         $this[config('lockable.locked_deletion_column')] = false;
 
-        return $this->save();
+        $result = $this->save();
+
+        $this->fireModelEvent('lockedDeletes', false);
+
+        return $result;
+    }
+
+    public static function lockingUpdates($callback)
+    {
+        static::registerModelEvent('lockingUpdates', $callback);
+    }
+
+    public static function lockedUpdates($callback)
+    {
+        static::registerModelEvent('lockedUpdates', $callback);
+    }
+
+    public static function unlockingUpdates($callback)
+    {
+        static::registerModelEvent('unlockingUpdates', $callback);
+    }
+
+    public static function unlockedUpdates($callback)
+    {
+        static::registerModelEvent('unlockedUpdates', $callback);
+    }
+
+    public static function lockingDeletes($callback)
+    {
+        static::registerModelEvent('lockingDeletes', $callback);
+    }
+
+    public static function lockedDeletes($callback)
+    {
+        static::registerModelEvent('lockedDeletes', $callback);
+    }
+
+    public static function unlockingDeletes($callback)
+    {
+        static::registerModelEvent('unlockingDeletes', $callback);
+    }
+
+    public static function unlockedDeletes($callback)
+    {
+        static::registerModelEvent('unlockedDeletes', $callback);
     }
 
     public static function bootLockable()
